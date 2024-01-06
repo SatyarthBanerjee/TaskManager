@@ -27,16 +27,24 @@ const HomeCont = () => {
         <div className={styles.sublines}></div>
         <div className={styles.sublines}></div>
         <div className={styles.sublines}></div>
-       
       </div>
       <div className={styles.tasks}>
         <div className={styles.today}>
           <div className={styles.todaycont}>
-            <div className={styles.checkbox}></div>
-            <div className={styles.checkbox}></div>
+            <div className={styles.check}>
+              <div className={styles.checkbox}></div>
+            </div>
+
+            <div className={styles.details}>
+              <p>Task Manager</p>
+              <div className={styles.tags}>
+                  <div className={styles.circle}></div>
+                  <p>Personal</p>
+              </div>
+            </div>
           </div>
-          <div className={styles.todaycont}></div>
-          <div className={styles.todaycont}></div>
+          {/* <div className={styles.todaycont}></div>
+          <div className={styles.todaycont}></div> */}
         </div>
         <div className={styles.tomorrow}></div>
         <div className={styles.upcoming}></div>
