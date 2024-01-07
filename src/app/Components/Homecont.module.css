@@ -116,7 +116,7 @@
   color: #FF3C58;
   cursor: pointer;
 }
-.tags:active{
+.tags:focus{
   outline: #FF3C58;
 }
 .circle{
