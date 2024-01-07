@@ -41,6 +41,12 @@ const HomeCont = () => {
     setaddtag(!addtag);
   };
   useEffect(() => {
+    settodaydet({
+      task:"",
+      tag:"",
+      status:""
+
+    })
     console.log(details);
   }, [details]);
   const handleKeyPress = (event) => {
