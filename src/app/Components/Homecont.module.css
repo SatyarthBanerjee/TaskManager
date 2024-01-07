@@ -116,6 +116,9 @@
   color: #FF3C58;
   cursor: pointer;
 }
+.tags:active{
+  outline: #FF3C58;
+}
 .circle{
   height: 6px;
   width: 6px;
