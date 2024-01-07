@@ -5,10 +5,12 @@ import { useState } from "react";
 const HomeCont = () => {
   const [check, setCheck] = useState(false);
   const [task, setTask] = useState(false);
+  const currentDate = new Date();
   const [todaydet, settodaydet] = useState({
     task: "",
     tag: "",
     status: "",
+    date: currentDate
   });
   const [details, setDetails] = useState([]);
   const handleCheck = (id) => {
@@ -123,17 +125,24 @@ const HomeCont = () => {
                 <>
                   <button
                     className={styles.tags}
-                    value="personal"
+                    value="Personal"
                     onClick={(e) => handleChange(e.target.value, "tag")}
                   >
                     Personal
                   </button>
                   <button
-                    value="work"
+                    value="Work"
                     className={styles.tags}
                     onClick={(e) => handleChange(e.target.value, "tag")}
                   >
                     Work
+                  </button>
+                  <button
+                    className={styles.tags}
+                    value="Academic"
+                    onClick={(e) => handleChange(e.target.value, "tag")}
+                  >
+                  Academic
                   </button>
                 </>
               )}
