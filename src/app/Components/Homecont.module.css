@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 .tags:focus{
-  outline: #FF3C58;
+  border: 1.5px solid #FF3C58
 }
 .circle{
   height: 6px;
