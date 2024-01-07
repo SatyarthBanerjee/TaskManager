@@ -9,7 +9,7 @@ const HomeCont = () => {
   const [todaydet, settodaydet] = useState({
     task: "",
     tag: "",
-    status: "",
+    status: false,
     date: currentDate
   });
   const [details, setDetails] = useState([]);
@@ -44,7 +44,7 @@ const HomeCont = () => {
     settodaydet({
       task:"",
       tag:"",
-      status:""
+      status:false
 
     })
     console.log(details);
