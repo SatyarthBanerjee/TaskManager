@@ -80,7 +80,7 @@ const HomeCont = () => {
         <div className={styles.today}>
           {details.map((item, id) => {
             return (
-              <div className={styles.todaycont}>
+              <div key={id} className={styles.todaycont}>
                 <div className={styles.check}>
                   <div
                     onClick={() => handleCheck(id)}
