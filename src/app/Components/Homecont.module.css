@@ -60,9 +60,14 @@
     /* height: 20%; */
     width: 23%;
     /* background-color: #F9DADA; */
+    height: 65vh;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    overflow-y: auto;
+}
+.today::-webkit-scrollbar{
+  display: none;
 }
 .todaycont{
     height: 80px;
@@ -71,12 +76,13 @@
     border-radius: 12px;
     display: flex;
     flex-direction: row;
+    padding: 15px;
 }
 .check{
   width: 20%;
   height: 100%;
-  padding-top: 15px;
-  padding-left: 15px;
+  /* padding-top: 15px;
+  padding-left: 15px; */
 }
 .checkbox{
   height: 20px;
@@ -108,6 +114,7 @@
   align-items: center;
   gap: 4px;
   color: #FF3C58;
+  cursor: pointer;
 }
 .circle{
   height: 6px;
