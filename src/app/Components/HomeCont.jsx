@@ -77,9 +77,9 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
     });
     
   };
-  const [addtag, setaddtag] = useState(false);
+  const [todaytag, settodaytag] = useState(false);
   const handleaddtag = () => {
-    setaddtag(!addtag);
+    settodaytag(!todaytag);
   };
   useEffect(() => {
     console.log(details);
@@ -162,7 +162,7 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
                   <div className={styles.circle}></div>
                   <p>Add tag</p>
                 </div>
-                {addtag && (
+                {todaytag && (
                   <>
                     <button
                       className={styles.tags}
