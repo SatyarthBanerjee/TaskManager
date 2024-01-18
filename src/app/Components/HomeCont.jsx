@@ -6,6 +6,7 @@ const HomeCont = () => {
   const [check, setCheck] = useState(false);
   const [task, setTask] = useState(false);
   const [tomtask, settomTask] = useState(false);
+  const [alldetails, setalldetails] = useState([])
   const currentDate = new Date();
   const tomorrowDate = new Date();
 tomorrowDate.setDate(currentDate.getDate() + 1);
@@ -37,9 +38,11 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
   const handletask = (value) => {
     if(value==="today"){
       setTask(!task);
+      settomTask(false)
     }
     else if(value==="tomorrow"){
       settomTask(!tomtask)
+      setTask(false)
     }
     
   };
@@ -59,11 +62,23 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
   };
   const handleUpdate = () => {
     if(task){
-      setDetails((prevDetails) => [...prevDetails, todaydet]);
+      if(todaydet.task!=="" && todaydet.tag!==""){
+        setDetails((prevDetails) => [...prevDetails, todaydet]);
+      }
+      else{
+        alert("Both fields are required");
+      }
+      
 
     }
     else if(tomtask){
-      setTomorrowDetails((prevData)=>[...prevData,tomorrowdet]);
+      if(tomorrowdet.task!=="" && tomorrowdet.tag!==""){
+        setTomorrowDetails((prevData)=>[...prevData,tomorrowdet]);
+      }
+      else{
+        alert("Both fields are required");
+      }
+      
     }
     settodaydet({
       task: "",
@@ -78,20 +93,52 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
     
   };
   const [todaytag, settodaytag] = useState(false);
-  const handleaddtag = () => {
-    settodaytag(!todaytag);
+  const [tomorrowtag, settomorrowtag] = useState(false);
+  const handleaddtag = (when) => {
+    if(when==="today"){
+      settodaytag(!todaytag);
+    }
+    else if(when==="tomorrow"){
+      settomorrowtag(!tomorrowtag)
+    }
+    
   };
   useEffect(() => {
     console.log(details);
-    console.log(tomorrowdetails);
+    // console.log(tomorrowdetails);
   }, [details]);
+  useEffect(() => {
+    // console.log(details);
+    console.log(tomorrowdetails);
+  }, [tomorrowdetails]);
   const handleKeyPress = (event) => {
     // Check if the pressed key is Enter (key code 13)
     if (event.key === "Enter") {
       // Handle your logic here when Enter is pressed
       handleUpdate();
+      // if(task){
+       
+      // }
+      // else if(tomtask){
+      //   setalldetails((prevData)=>[
+      //     ...prevData,{tomorrowsTask:tomorrowdetails}
+      //   ])
+      // }
     }
+  
   };
+  useEffect(()=>{
+    if (details.length > 0 || tomorrowdetails.length > 0) {
+      setalldetails([
+        { todaystask: details },
+        { tomorrowsTask: tomorrowdetails },
+      ]);
+    }
+    // console.log(alldetails);
+  },[details,tomorrowdetails])
+  useEffect(()=>{
+    console.log(alldetails);
+  },[alldetails])
   return (
     <div className={styles.homecont} onKeyPress={handleKeyPress} tabIndex="0">
       <h3>Task Manager</h3>
@@ -158,7 +205,7 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
                 ></input>
               </div>
               <div className={styles.mytags}>
-                <div onClick={handleaddtag} className={styles.tags}>
+                <div onClick={()=>handleaddtag("today")} className={styles.tags}>
                   <div className={styles.circle}></div>
                   <p>Add tag</p>
                 </div>
@@ -233,11 +280,11 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
                 ></input>
               </div>
               <div className={styles.mytags}>
-                <div onClick={handleaddtag} className={styles.tagstomorrow}>
+                <div onClick={()=>handleaddtag("tomorrow")} className={styles.tagstomorrow}>
                   <div className={styles.circletomorrow}></div>
                   <p>Add tag</p>
                 </div>
-                {addtag && (
+                {tomorrowtag && (
                   <>
                     <button
                       className={styles.tagstomorrow}
