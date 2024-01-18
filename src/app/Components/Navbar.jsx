@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.pfp}>
-        <Image src="/Assets/pfp.png" width={80} height={80} />
+        <Image rel="preload" src="/Assets/pfp.png" width={80} height={80} />
       </div>
       <div className={styles.listnavs}>
         <ul>

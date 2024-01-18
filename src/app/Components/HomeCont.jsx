@@ -7,6 +7,8 @@ const HomeCont = () => {
   const [task, setTask] = useState(false);
   const [tomtask, settomTask] = useState(false);
   const currentDate = new Date();
+  const tomorrowDate = new Date();
+tomorrowDate.setDate(currentDate.getDate() + 1);
   const [todaydet, settodaydet] = useState({
     task: "",
     tag: "",
@@ -17,7 +19,7 @@ const HomeCont = () => {
     task: "",
     tag: "",
     status: false,
-    date: currentDate+1,
+    date: tomorrowDate,
   });
   const [details, setDetails] = useState([]);
   const [tomorrowdetails, setTomorrowDetails] = useState([]);
