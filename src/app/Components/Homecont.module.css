@@ -53,7 +53,7 @@
     width: 100%;
     height: 100vh;
     display: flex;
-    gap: 15px;
+    gap: 40px;
     padding-left: 20px;
 }
 .today{
@@ -209,4 +209,106 @@ gap: 5px
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+}
+.tomorrow{
+  width: 23%;
+  /* background-color: #F9DADA; */
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+  /* margin-left: 10px; */
+
+}
+.tomorrowcont{
+  height: 80px;
+  width: 100%;
+  background-color: #D6E6FD;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: 15px;
+  /* margin-left: 10px; */
+}
+.tagstomorrow{
+  font-size: 10px;
+  /* background-color: #FDF1D9; */
+  width: 63px;
+  height: 18px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #5F7BD6;
+  cursor: pointer;
+  background-color: #D9FCFA;
+  border-style: none;
+}
+.tagstomorrow:focus{
+  outline: none;
+  border: 1.5px solid #5F7BD6;
+}
+.circletomorrow{
+  height: 6px;
+  width: 6px;
+  border-radius: 50%;
+  /* background-color: #FF3C58; */
+  background-color: #5F7BD6;
+}
+.circletomorrow:focus{
+  
+}
+.tomorrowadd{
+  text-align: left;
+  padding: 13px 0px 15px 26px;
+  border-radius: 12px;
+  background-color: none;
+  border-style: none;
+  font-size: 16px;
+  color:#5F7BD6;
+  background-color: transparent;
+  border: 2px solid var(--Board-Blue, #D6E6FD);
+  cursor: pointer;
+  position: relative;
+  /* z-index: 999; */
+  transition: 0.5s ease-in-out;
+}
+.inputtasktomorrow{
+  display: flex;
+  border: 2px solid var(--Board-Blue, #D6E6FD);
+  padding: 16px;
+  border-radius: 12px;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+.inputtasktomorrow_cont{
+  width: 100%;
+  border-radius: 15px;
+border: 1px solid var(--Board-Blue, #D6E6FD);
+padding: 12px 16px 12px 16px;
+display: flex;
+gap: 5px
+}
+.inputtasktomorrow_cont input{
+  width: 80%;
+  border-style: none;
+  color: #5F7BD6;
+}
+.inputtasktomorrow_cont input:focus{
+  outline: none;
+}
+.inputtasktomorrow_cont input::placeholder{
+  color: #5F7BD6;
+  font-size: larger;
+}
+.dottedcircletomorrow{
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 2px solid #5F7BD6;
+  background-color: #D6E6FD;
+  border-style: dotted;
 }
