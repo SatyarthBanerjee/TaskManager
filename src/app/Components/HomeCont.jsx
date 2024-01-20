@@ -6,7 +6,7 @@ const HomeCont = () => {
   const [check, setCheck] = useState(false);
   const [task, setTask] = useState(false);
   const [tomtask, settomTask] = useState(false);
-  const [alldetails, setalldetails] = useState([])
+  const [alldetails, setalldetails] = useState({})
   const currentDate = new Date();
   const tomorrowDate = new Date();
 tomorrowDate.setDate(currentDate.getDate() + 1);
@@ -128,16 +128,25 @@ tomorrowDate.setDate(currentDate.getDate() + 1);
   
   };
   useEffect(()=>{
-    if (details.length > 0 || tomorrowdetails.length > 0) {
-      setalldetails([
-        { todaystask: details },
-        { tomorrowsTask: tomorrowdetails },
-      ]);
-    }
+    
+      setalldetails(
+        { todaystask: details ,
+         tomorrowsTask: tomorrowdetails },
+      );
+    
     // console.log(alldetails);
   },[details,tomorrowdetails])
-  useEffect(()=>{
-    console.log(alldetails);
+  useEffect(async()=>{
+    try{
+      const result = await axios.post("http://localhost:4000/", alldetails);
+      if(result.response.status==200){
+        alert('Saved Successfully');
+      }
+    }
+    catch(error){
+      alert('Error', error);
+    }
+    
   },[alldetails])
   return (
     <div className={styles.homecont} onKeyPress={handleKeyPress} tabIndex="0">
