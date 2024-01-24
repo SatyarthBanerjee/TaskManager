@@ -1,15 +1,50 @@
 "use client"
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Login.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { GoogleLogin } from "@react-oauth/google";
 import GoogleLoginbtn from "./Buttons/GoogleLoginbtn";
 import Image from "next/image";
+import SignIn from "./SignIn";
+import axios from "axios";
 const LoginBox = () => {
   const session = useSession();
   console.log(session);
+  const [signin, setsignin] = useState(false);
+  const [userdet, setUserDet] = useState({
+    username_or_email:"",
+    password:"",
+    fullname:""
+  })
+  const handleChange= (value, name)=>{
+    setUserDet((prevData)=>{
+      return{...prevData,[name]: value}
+    })
+  }
+  
+  const handleCheckandset = (e)=>{
+    e.preventDefault();
+    setsignin(!signin)
+  }
+  const handleSignIn =async()=>{
+    try{
+      const res = await axios.post("http://localhost:4000/createuser", userdet)
+      if(res.status===201){
+        alert('User created')
+      }
+    }
+    catch(error){
+      if(error.response.status===401){
+        alert('Shit yaar')
+      }
+    }
+    
+   
+  }
+  
   return (
-    <div className={styles.loginbox}>
+    <>
+    {signin?<SignIn getback={()=>{setsignin(!signin)}} createuser={handleSignIn} username={(e)=>handleChange(e.target.value ,"username_or_email")} fullname={(e)=>handleChange(e.target.value ,"fullname")} />:<div className={styles.loginbox}>
       <div className={styles.loginicon}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -30,9 +65,9 @@ const LoginBox = () => {
       <h6>Welcome To Task Management</h6>
       <p>Login or Signup</p>
       <div className={styles.loginform}>
-        <input placeholder="Email or Username"></input>
-        <input placeholder="Password"></input>
-        <button>Continue</button>
+        <input onChange={(e)=>handleChange(e.target.value ,"username_or_email")} value={userdet.username_or_email} type="text" placeholder="Email or Username"></input>
+        <input onChange={(e)=>handleChange(e.target.value,"password")} value={userdet.password} type="password" placeholder="Password"></input>
+        <button name="continue1" onClick={handleCheckandset}>Continue</button>
       </div>
       <p>or</p>
       {/* <button onClick={()=>signIn("google")}>Login With Google</button> */}
@@ -40,7 +75,8 @@ const LoginBox = () => {
       <p>{session.data?.user?.email}</p>
       {/* <Image width={10} height={10} src={session.data?.user?.image} /> */}
       {/* <img src={session.data?.user?.image}></img> */}
-    </div>
+    </div>}
+    </>
   );
 };
 
