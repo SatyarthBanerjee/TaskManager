@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './page.module.css'
-import Navbar from './Components/Navbar'
-import HomeCont from './Components/HomeCont'
+import LoginBox from './Components/LoginBox'
+
+
 const page = () => {
   return (
-    <div className={styles.homepage}>
+    <div className={styles.loginpage}>
+      <LoginBox />
     
-      <Navbar />
-      <HomeCont/>
     </div>
   )
 }
