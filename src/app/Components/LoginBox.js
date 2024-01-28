@@ -7,6 +7,7 @@ import GoogleLoginbtn from "./Buttons/GoogleLoginbtn";
 import Image from "next/image";
 import SignIn from "./SignIn";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 const LoginBox = () => {
   const session = useSession();
   console.log(session);
@@ -16,28 +17,47 @@ const LoginBox = () => {
     password:"",
     fullname:""
   })
+  const router =useRouter()
   const handleChange= (value, name)=>{
     setUserDet((prevData)=>{
       return{...prevData,[name]: value}
     })
   }
   
-  const handleCheckandset = (e)=>{
+  const handleCheckandset = async(e)=>{
     e.preventDefault();
-    setsignin(!signin)
-  }
-  const handleSignIn =async()=>{
     try{
-      const res = await axios.post("http://localhost:4000/createuser", userdet)
-      if(res.status===201){
-        alert('User created')
+      const res = await axios.post("http://localhost:4000/checkuser", userdet)
+      if(res.status===200){
+        alert("Username or Email already exists")
+        router.push("/dashboard")
+        
       }
+     
     }
     catch(error){
-      if(error.response.status===401){
-        alert('Shit yaar')
-      }
+      setsignin(!signin)
+      
     }
+    
+   
+    
+  }
+  const handleSignIn =async()=>{
+      try{
+        const res = await axios.post("http://localhost:4000/createuser", userdet)
+        if(res.status===201){
+          alert('User created')
+          setsignin(!signin)
+        }
+      }
+      catch(error){
+        if(error.response.status===401){
+          alert('Shit yaar')
+        }
+      }
+    
+    
     
    
   }
