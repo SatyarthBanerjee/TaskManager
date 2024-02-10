@@ -1,0 +1,13 @@
+.dashboard{
+    height: 100vh;
+    width: 100%;
+    background-color: brown;
+    display: flex;
+    flex-direction: row;
+}
+.rootdash{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}

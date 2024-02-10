@@ -8,8 +8,12 @@ import Image from "next/image";
 import SignIn from "./SignIn";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/ContextAPI/AuthContext";
+import { useCheckAuth } from "@/ContextAPI/CheckSetContext";
 const LoginBox = () => {
   const session = useSession();
+  const { status, user, signinkr, signoutkr } = useAuth()
+  const {status_1, checkAuth, sign} = useCheckAuth();
   console.log(session);
   const [signin, setsignin] = useState(false);
   const [userdet, setUserDet] = useState({
@@ -24,19 +28,24 @@ const LoginBox = () => {
     })
   }
   
-  const handleCheckandset = async(e)=>{
+  const handleCheckandset = (e)=>{
     e.preventDefault();
     try{
-      const res = await axios.post("http://localhost:4000/checkuser", userdet)
-      if(res.status===200){
-        alert("Username or Email already exists")
-        router.push("/dashboard")
+     checkAuth(userdet);
+     console.log(status_1);
+     if(status_1===200){
+      
+      router.push("/dashboard")
+     }
+     else{
+      setsignin(sign)
+     }
         
-      }
+      
      
     }
     catch(error){
-      setsignin(!signin)
+      alert(error)
       
     }
     
@@ -44,22 +53,22 @@ const LoginBox = () => {
     
   }
   const handleSignIn =async()=>{
-      try{
-        const res = await axios.post("http://localhost:4000/createuser", userdet)
-        if(res.status===201){
-          alert('User created')
-          setsignin(!signin)
-        }
+     try{
+      await signinkr(userdet)
+      if(status===200){
+        setsignin(!signin)
       }
-      catch(error){
-        if(error.response.status===401){
-          alert('Shit yaar')
-        }
-      }
+     }
+     catch(error){
+      console.log(error);
+     }
     
     
     
    
+  }
+  if(session.status==="authenticated"){
+    router.push("/dashboard");
   }
   
   return (

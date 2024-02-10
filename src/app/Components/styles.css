@@ -1,0 +1,24 @@
+/* styles.css */
+
+/* Custom style for selected dates */
+/* .custom-datepicker .react-datepicker__day--selected {
+    background-color: purple;
+    border-radius: 50%;
+  } */
+  /* Datepicker.css */
+
+/* Additional custom styles for the DatePicker */
+.custom-datepicker .ant-picker-input > input {
+  border-radius: 50%;
+  background-color: purple;
+}
+.custom-date-cell {
+  border-radius: 50%;
+  margin: 2px;
+  padding: 8px;
+}
+
+.selected-date {
+  background-color: purple; /* Customize the background color for selected dates */
+  color: white; /* Optionally, customize the text color for better visibility */
+}
