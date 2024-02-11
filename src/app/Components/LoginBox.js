@@ -10,6 +10,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/ContextAPI/AuthContext";
 import { useCheckAuth } from "@/ContextAPI/CheckSetContext";
+import Loader from "./Loading/Loader";
+
 const LoginBox = () => {
   const session = useSession();
   const { status, user, signinkr, signoutkr } = useAuth()
@@ -69,6 +71,11 @@ const LoginBox = () => {
   }
   if(session.status==="authenticated"){
     router.push("/dashboard");
+  }
+  else if(session.status==="loading"){
+    return(
+      <Loader />
+    )
   }
   
   return (

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 import image from "./Avatar.jpg";
@@ -8,7 +8,13 @@ import { signOut } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 const Navbar = () => {
   const session = useSession();
-  const router = useRouter();
+  const router = useRouter()
+  useEffect(()=>{
+    if(session?.status==="unauthenticated"){
+      router.push("/");
+    }
+  },[session?.status])
+ 
   return (
     <div className={styles.navbar}>
       <div className={styles.profinfo}>
@@ -121,8 +127,9 @@ const Navbar = () => {
             Completed
           </li>
           <li onClick={()=>{
+            // router.push("/")
             signOut("google");
-            router.push("/")
+            
 
           }}>
             <svg
