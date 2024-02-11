@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
 import AddTask from '../Components/Forms/AddTask'
 import styles from "./dashboard.module.css"
-const page = () => {
+const Page = () => {
   const {user} = useAuth()
   const {user_1} = useCheckAuth();
   const {signcontextOut}= useCheckAuth();
@@ -89,4 +89,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
