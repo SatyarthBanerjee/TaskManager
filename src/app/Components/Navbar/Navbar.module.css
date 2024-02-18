@@ -9,12 +9,13 @@
 .profinfo {
   display: flex;
   flex-direction: row;
-  padding: 28px 36px;
+  padding: 28.5px 36px;
 
   justify-content: center;
   align-items: center;
   gap: 12px;
   border: 1.5px solid var(--Gray-200, #eaecf0);
+  /* border-bottom: none; */
 }
 .profinfo p:nth-child(1) {
   font-size: 14px;
@@ -35,6 +36,7 @@ align-items: flex-start;
 gap: 8px;
 border: 1.5px solid var(--Gray-200, #eaecf0);
 /* flex-shrink: 0; */
+/* border-top: none; */
 }
 .menuitems ul {
   display: flex;
@@ -65,7 +67,7 @@ line-height: 20px;
 .profinfo img{
     border-radius: 50%;
 }
-.menuitems ul li:nth-child(5){
+.menuitems ul li:nth-child(3){
     color: var(--Error-700, #B42318);
     border: 1px solid var(--Error-300, #FDA29B);
 }

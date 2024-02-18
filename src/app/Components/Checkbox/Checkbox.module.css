@@ -1,0 +1,23 @@
+.checkbox {
+  height: 20px;
+  width: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--Gray-300, #d0d5dd);
+  background: var(--White, #fff);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.active {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  border: 1px solid var(--Brand-600, #7f56d9);
+  background: var(--Brand-50, #f9f5ff);
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+}

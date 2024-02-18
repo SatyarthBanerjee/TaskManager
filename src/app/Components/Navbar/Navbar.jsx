@@ -44,7 +44,7 @@ const Navbar = () => {
             </svg>
             Home
           </li>
-          <li>
+          {/* <li>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -61,8 +61,8 @@ const Navbar = () => {
               />
             </svg>
             Today
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -100,8 +100,8 @@ const Navbar = () => {
               </defs>
             </svg>
             Tomorrow
-          </li>
-          <li>
+          </li>*/}
+          <li> 
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"

@@ -11,6 +11,8 @@ import { useSession } from 'next-auth/react'
 import { signOut } from 'next-auth/react'
 import AddTask from '../Components/Forms/AddTask'
 import styles from "./dashboard.module.css"
+import Searchandtitle from '../Components/Navbar/Searchandtitle'
+import Tasks from '../Components/Tasks/Tasks'
 const Page = () => {
   const {user} = useAuth()
   const {user_1} = useCheckAuth();
@@ -70,9 +72,13 @@ const Page = () => {
     signOut("google")
 
   }
-  const count = useRef(0)
+  const count = useRef(0);
+  const [blur, setblur] = useState(false)
   return (
     <div className={styles.dashboard}>
+    <Searchandtitle />
+    <Tasks 
+    />
     {/*sample form*/}
       {/* <input onChange={e=>handleChange(e.target.value, "task")} value={tasks.task} placeholder="add task"></input>
       <input onChange={e=>handleChange(e.target.value, "tag")} value={tasks.tag} placeholder='add tag'></input>
