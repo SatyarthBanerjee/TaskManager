@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
 import { signIn, useSession } from "next-auth/react";
 import { GoogleLogin } from "@react-oauth/google";
@@ -11,37 +11,48 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/ContextAPI/AuthContext";
 import { useCheckAuth } from "@/ContextAPI/CheckSetContext";
 import Loader from "./Loading/Loader";
+import { jwtDecode } from "jwt-decode";
 
 const LoginBox = () => {
   const session = useSession();
   const { status, user, signinkr, signoutkr } = useAuth()
   const {status_1, checkAuth, sign} = useCheckAuth();
-  console.log(session);
+  // console.log(session);
   const [signin, setsignin] = useState(false);
   const [userdet, setUserDet] = useState({
     username_or_email:"",
     password:"",
     fullname:""
-  })
+  });
+  const [authorized, setAuthrorized] = useState(false);
   const router =useRouter()
   const handleChange= (value, name)=>{
     setUserDet((prevData)=>{
       return{...prevData,[name]: value}
     })
   }
+  // useEffect(() => {
+  //   if (status_1 === 200|| session?.status==="authenticated") {
+  //     router.push("/dashboard");
+  //   }
+  // }, [status_1, router]);
   
-  const handleCheckandset = (e)=>{
+  
+  const handleCheckandset = async (e)=>{
     e.preventDefault();
     try{
-     checkAuth(userdet);
+     await checkAuth(userdet);
      console.log(status_1);
-     if(status_1===200){
+    //  if(status_1===200){
+    //   setAuthrorized(true);
+    //   if(authorized===true){
+    //     router.push("/dashboard")
+    //   }
       
-      router.push("/dashboard")
-     }
-     else{
-      setsignin(sign)
-     }
+    //  }
+    //  else{
+    //   setsignin(sign)
+    //  }
         
       
      
@@ -54,6 +65,25 @@ const LoginBox = () => {
    
     
   }
+
+  useEffect(() => {
+    const redirectUser =  () => {
+      if (status_1 === 200) {
+         router.push("/dashboard"); 
+      } 
+      else if (session.status === "authenticated") {
+         router.push("/dashboard");
+      } 
+      else {
+        setsignin(sign);
+      }
+    };
+  
+    redirectUser(); // Call the function immediately inside useEffect
+  
+    // Add session.status, status_1, and router to dependencies
+  }, [session.status, status_1, router]);
+  
   const handleSignIn =async()=>{
      try{
       await signinkr(userdet)
@@ -69,14 +99,30 @@ const LoginBox = () => {
     
    
   }
-  if(session.status==="authenticated"){
-    router.push("/dashboard");
-  }
-  else if(session.status==="loading"){
+  const handleGoogleSignIn = async () => {
+    try {
+      const response = await signIn("google");
+      const token = response?.access_token;
+  
+      if (token) {
+        const decodedToken = jwt_decode(token);
+        // Now you can access user information from the decoded token
+        console.log(decodedToken);
+        // Perform any additional actions here, such as setting user information in state
+      } else {
+        // Handle the case where the token is not available
+        console.error("Google sign-in failed: Token not found");
+      }
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    }
+  };
+  if(session.status==="loading"){
     return(
       <Loader />
     )
   }
+
   
   return (
     <>
@@ -103,11 +149,11 @@ const LoginBox = () => {
       <div className={styles.loginform}>
         <input onChange={(e)=>handleChange(e.target.value ,"username_or_email")} value={userdet.username_or_email} type="text" placeholder="Email or Username"></input>
         <input onChange={(e)=>handleChange(e.target.value,"password")} value={userdet.password} type="password" placeholder="Password"></input>
-        <button name="continue1" onClick={handleCheckandset}>Continue</button>
+        <button name="continue1" onClick={(e)=>handleCheckandset(e)}>Continue</button>
       </div>
       <p>or</p>
       {/* <button onClick={()=>signIn("google")}>Login With Google</button> */}
-      <GoogleLoginbtn onclick ={()=>signIn("google")}/>
+      <GoogleLoginbtn onclick ={handleGoogleSignIn}/>
       <p>{session.data?.user?.email}</p>
       {/* <Image width={10} height={10} src={session.data?.user?.image} /> */}
       {/* <img src={session.data?.user?.image}></img> */}

@@ -84,4 +84,46 @@
     background-color: purple;
     border-color: purple;
   }
-  
+.tasks{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: scroll;
+}
+.tasks::-webkit-scrollbar{
+  display: none;
+}
+
+.todaytask{
+  display: flex;
+  width: 100%;
+  gap: 20px;
+  /* background-color: #1d2939; */
+}
+.taskdetails{
+  display: flex;
+  width: 100%;
+  /* gap: 315px; */
+  /* background-color: #4e5ba6; */
+}
+/* .taskdetails div:nth-child(1){
+  margin-left: 100px;
+} */
+.taskdetails p:nth-child(3){
+  margin-left: -50px
+}
+.taskname{
+  width: 42%;
+}
+.mytags{
+  width: 30%
+}
+/* .mystatus{
+  width: 50%;
+} */
+.underline{
+  width: 100%;
+  height: 2px;
+  border-bottom: 1.5px solid var(--Gray-200, #EAECF0);
+}

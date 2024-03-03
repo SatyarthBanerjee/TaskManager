@@ -8,6 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import AuthProvider from "@/AuthProvider/AuthProvider";
 import { AuthorProvider } from "@/ContextAPI/AuthContext";
 import { CheckProvider } from "@/ContextAPI/CheckSetContext";
+import { DataProvider } from "@/ContextAPI/DataContext";
 // import Navbar from './Components/Navbar'
 export const metadata = {
   title: "Task Manager",
@@ -19,11 +20,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         {/* <Navbar /> */}
-        <CheckProvider>
-          <AuthorProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </AuthorProvider>
-        </CheckProvider>
+        <DataProvider>
+          <CheckProvider>
+            <AuthorProvider>
+              <AuthProvider>{children}</AuthProvider>
+            </AuthorProvider>
+          </CheckProvider>
+        </DataProvider>
 
         <SpeedInsights />
       </body>

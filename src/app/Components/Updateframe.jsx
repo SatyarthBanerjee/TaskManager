@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "../Components/Forms/forms.module.css";
-const Updateframe = () => {
+const Updateframe = ({task, handleChange}) => {
   return (
     <div className={styles.addtaskform}>
       <div className={styles.updatetask}>
-        <input placeholder="Write an Update here"></input>
+        <input value={task} placeholder="Write an Update here" onChange={e=>handleChange(e.target.value, "task")}></input>
       </div>
       <div className={styles.utilityframe}>
         <svg

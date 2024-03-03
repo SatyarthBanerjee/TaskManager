@@ -13,12 +13,14 @@ import AddTask from '../Components/Forms/AddTask'
 import styles from "./dashboard.module.css"
 import Searchandtitle from '../Components/Navbar/Searchandtitle'
 import Tasks from '../Components/Tasks/Tasks'
+import { useDataContext } from '@/ContextAPI/DataContext'
 const Page = () => {
   const {user} = useAuth()
   const {user_1} = useCheckAuth();
   const {signcontextOut}= useCheckAuth();
   const session = useSession();
-  const todaydate = new Date()
+  const todaydate = new Date();
+  const { data, loading, getAllData } = useDataContext();
   const [tasks, setTasks] = useState( {
    
     
@@ -30,6 +32,7 @@ const Page = () => {
       userId: user_1? user_1?._id:"",
    
   });
+
   console.log(user_1);
   useEffect(()=>{
     if(user_1){
@@ -39,6 +42,14 @@ const Page = () => {
     }
   },[user_1])
   console.log(user);
+  console.log(data);
+  useEffect(() => {
+    // Call getAllData when the component mounts
+    console.log(session?.data?.user);
+    getAllData(session?.data?.user?.email);
+    
+  }, []);
+  
   // const storedUserId = localStorage.getItem('userId') || '';
   const handleChange =(value, name)=>{
     setTasks((prevValue)=>{
@@ -78,6 +89,8 @@ const Page = () => {
     <div className={styles.dashboard}>
     <Searchandtitle />
     <Tasks 
+      blur={blur}
+      myData = {data}
     />
     {/*sample form*/}
       {/* <input onChange={e=>handleChange(e.target.value, "task")} value={tasks.task} placeholder="add task"></input>

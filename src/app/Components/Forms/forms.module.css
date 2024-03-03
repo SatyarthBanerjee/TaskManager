@@ -202,3 +202,11 @@ font-weight: 600;
 line-height: 20px; /* 142.857% */
 cursor: pointer;
 }
+.addtask ul{
+  list-style: none;
+  display: flex;
+  font-size: 12px;
+  gap: 10px;
+  cursor: pointer;
+
+}

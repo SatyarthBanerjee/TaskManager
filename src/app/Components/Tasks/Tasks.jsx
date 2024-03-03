@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./tasks.module.css";
 import Checkbox from "@/app/Components/Checkbox/Checkbox"
 import AddTask from "../Forms/AddTask";
+import TodayTask from "./TodayTask";
 // import sound from "./metal-clang-sound-81634.mp3"
-const Tasks = () => {
+const Tasks = ({myData}) => {
+  // console.log(myData);
   const [checked , setChecked] = useState(false);
   const [showtask, setShowTask] = useState(false);
   
@@ -46,9 +48,22 @@ const Tasks = () => {
           <p>Status</p>
       </div>
       <div className={styles.tasks}>
-          <Checkbox onCheck={handleChange}
+          {/* <Checkbox onCheck={handleChange}
             status={checked}
-          />
+          /> */}
+          {myData?.todaydetails?.map((item)=>{
+            return (
+              <>
+              <TodayTask 
+                task={item.task}
+                tag = {item.tag}
+              />
+              <div className={styles.underline}></div>
+              </>
+            
+            )
+          })}
+          
       </div>
     </div>
   );
